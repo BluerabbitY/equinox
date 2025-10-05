@@ -8,4 +8,4 @@ set(PLATFORM "x86_64")
 
 set(PREFIX_PATH "${CMAKE_SOURCE_DIR}/output/${PLATFORM}")
 
-add_subdirectory(src/main)
+add_subdirectory(src)
