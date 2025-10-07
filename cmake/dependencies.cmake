@@ -61,3 +61,37 @@ function(add_lib60870)
             # ALWAYS 1
     )
 endfunction()
+
+# ---------------------------------------------------------------------------
+# function: add_huskarui
+#
+# Purpose: Minimal wrapping of the original ExternalProject_Add configuration
+#          to download, configure, and build lib60870 exactly as in your
+#          original snippet—no generalization or parameterization.
+#
+# Signature:
+#   add_huskarui()
+#
+# Example Usage:
+#   add_huskarui()
+# ---------------------------------------------------------------------------
+function(add_huskarui)
+    include(ExternalProject)
+
+    set(HuskarUI_NAME HuskarUI)
+
+    ExternalProject_Add(${HuskarUI_NAME}
+            GIT_REPOSITORY https://github.com/mengps/HuskarUI.git
+            GIT_TAG master
+            PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/HuskarUI
+            CMAKE_ARGS
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.16
+            -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
+            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+            -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
+            -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+            -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+            -DBUILD_HUSKARUI_GALLERY:BOOL=OFF
+    )
+endfunction()

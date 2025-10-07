@@ -2,4 +2,7 @@
 cmake-build-debug
 cmake-build-release
 output
-src/dependencies/lib60870
+
+# ignore all files in the dependencies directory except CMakeLists.txt
+src/dependencies/*
+!src/dependencies/CMakeLists.txt
