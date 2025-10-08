@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     HusApp::initialize(&engine);
-
-    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
+    // engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
 
     QObject::connect(
         &engine,
@@ -26,7 +25,7 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("equinox", "main");
+    engine.loadFromModule("equinox", "Main");
 
     return app.exec();
 }

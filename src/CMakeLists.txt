@@ -26,7 +26,7 @@ qt_add_qml_module(${PROJECT_NAME}
         URI ${PROJECT_NAME}
         VERSION 1.0
         QML_FILES
-            qml/main.qml
+            qml/Main.qml
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
