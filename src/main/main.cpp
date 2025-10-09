@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("equinox", "Main");
+    engine.loadFromModule("herald", "Main");
 
     return app.exec();
 }
