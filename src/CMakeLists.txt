@@ -1,36 +1,30 @@
 include(${CMAKE_SOURCE_DIR}/cmake/build.cmake)
 
-add_subdirectory(dependencies)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 option(BUILD_HUSKARUI_STATIC_LIBRARY "HuskarUI is static library." OFF)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+add_subdirectory(dependencies)
 
-qt_policy(SET QTP0001 NEW)
-
-#qt_standard_project_setup()
+# Qt build specific options, need to be defined before any Qt target
+# qt_standard_project_setup()
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-qt_add_executable(${PROJECT_NAME}
-        main/main.cpp
-)
+qt_add_executable(${PROJECT_NAME})
 
-add_dependencies(${CMAKE_PROJECT_NAME} lib60870)
-add_dependencies(${CMAKE_PROJECT_NAME} HuskarUI)
+add_dependencies(${CMAKE_PROJECT_NAME} fetch_all)
 
-message(STATUS "QML module name: ${PROJECT_NAME}")
+include_directories(${CMAKE_CURRENT_LIST_DIR}/common)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/dependencies/spdlog/include)
 
-qt_add_qml_module(${PROJECT_NAME}
-        URI ${PROJECT_NAME}
-        VERSION 1.0
-        QML_FILES
-            qml/Main.qml
-)
+capitalize(${PROJECT_NAME} APP_NAME)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         $<$<BOOL:${BUILD_HUSKARUI_STATIC_LIBRARY}>:BUILD_HUSKARUI_STATIC_LIBRARY>
+        APP_NAME="${APP_NAME}"
+        APP_VERSION="${PROJECT_VERSION}"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -49,7 +43,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 set(WIN_RC_FILE "")
-if(WIN32)
+if (WIN32)
     include(${CMAKE_SOURCE_DIR}/src/dependencies/HuskarUI/src/HuskarUI/.cmake/HuskarUIHelper.cmake)
     string(TIMESTAMP CURRENT_YEAR "%Y")
     set(WIN_RC_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_Resource.rc)
@@ -63,6 +57,13 @@ if(WIN32)
             ICONS resources/icon.ico
             OUTPUT_FILE "${WIN_RC_FILE}"
     )
-endif()
+endif ()
 
 set_target_output_dir(${CMAKE_PROJECT_NAME} ${PREFIX_PATH} EXE)
+
+# add additional sources from subdirectories
+add_subdirectory(common)
+add_subdirectory(model)
+add_subdirectory(view)
+add_subdirectory(viewmodel)
+add_subdirectory(herald)

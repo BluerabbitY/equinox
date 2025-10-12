@@ -39,19 +39,19 @@
 function(set_target_output_dir Target PrefixPath Mode)
     if (NOT TARGET ${Target})
         message(FATAL_ERROR "Target '${Target}' does not exist.")
-    endif()
+    endif ()
 
     set(MODE_LIST "LIB;EXE")
     list(FIND MODE_LIST "${Mode}" idx)
     if (idx EQUAL -1)
         message(FATAL_ERROR "Invalid output: '${Mode}'，option：${MODE_LIST}")
-    endif()
+    endif ()
 
     if (${Mode} EQUAL LIB)
         set(basePath "${PrefixPath}/lib")
     else ()
         set(basePath "${PrefixPath}")
-    endif()
+    endif ()
 
     set_target_properties(${Target} PROPERTIES
             ARCHIVE_OUTPUT_DIRECTORY "${basePath}"
@@ -59,12 +59,20 @@ function(set_target_output_dir Target PrefixPath Mode)
             RUNTIME_OUTPUT_DIRECTORY "${basePath}"
     )
 
-    foreach(buildType Debug Release RelWithDebInfo MinSizeRel)
+    foreach (buildType Debug Release RelWithDebInfo MinSizeRel)
         string(TOLOWER "${buildType}" lc)
         set_target_properties(${Target} PROPERTIES
                 ARCHIVE_OUTPUT_DIRECTORY_${buildType} "${basePath}/${lc}"
                 LIBRARY_OUTPUT_DIRECTORY_${buildType} "${basePath}/${lc}"
                 RUNTIME_OUTPUT_DIRECTORY_${buildType} "${basePath}/${lc}"
         )
-    endforeach()
+    endforeach ()
+endfunction()
+
+function(capitalize input output)
+    string(SUBSTRING "${input}" 0 1 first)
+    string(TOUPPER "${first}" first_upper)
+    string(SUBSTRING "${input}" 1 -1 rest)
+    set(result "${first_upper}${rest}")
+    set(${output} "${result}" PARENT_SCOPE)
 endfunction()

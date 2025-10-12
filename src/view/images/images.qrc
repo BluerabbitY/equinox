@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/herald">
+        <file></file>
+    </qresource>
+</RCC>
