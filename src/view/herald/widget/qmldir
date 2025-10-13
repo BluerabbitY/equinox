@@ -1,0 +1,3 @@
+module herald.widget
+
+HeraldMenuBar 1.0 HeraldMenuBar.qml

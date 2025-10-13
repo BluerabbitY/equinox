@@ -22,6 +22,8 @@
 #include <QQuickWindow>
 #include <qqmlcontext.h>
 
+#include "addDefaultImportPaths.hpp"
+
 inline void heraldInitResource()
 {
     Q_INIT_RESOURCE(herald);
@@ -99,6 +101,7 @@ class HeraldInit::Impl final
     void initQmlEngine(QQmlEngine &engine)
     {
         HusApp::initialize(&engine);
+        addDefaultImportPaths(engine);
     }
 
     bool loadFullUi(QQmlApplicationEngine &engine)
