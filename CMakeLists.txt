@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 4.0)
 
+set(HERALD_CMAKE_CONFIG_FILE_PATH "${CMAKE_SOURCE_DIR}/.cache/herald.config")
+if(EXISTS "${HERALD_CMAKE_CONFIG_FILE_PATH}")
+    file(READ "${HERALD_CMAKE_CONFIG_FILE_PATH}" CMAKE_PREFIX_PATH)
+else()
+    message(FATAL_ERROR "Please run command \"HeraldTool.py --setup\" to initialize project first")
+endif()
+
 if (NOT CMAKE_PREFIX_PATH)
     message(FATAL_ERROR "CMAKE_PREFIX_PATH is not set.")
 else ()

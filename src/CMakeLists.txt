@@ -11,10 +11,6 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
 list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}/view")
 set(QML_IMPORT_PATH ${QML_IMPORT_PATH} CACHE STRING "" FORCE)
 
-option(BUILD_HUSKARUI_STATIC_LIBRARY "HuskarUI is static library." OFF)
-
-add_subdirectory(dependencies)
-
 # Qt build specific options, need to be defined before any Qt target
 # qt_standard_project_setup()
 set(CMAKE_AUTOMOC ON)
@@ -24,15 +20,11 @@ set(CMAKE_AUTOUIC ON)
 qt_add_executable(${PROJECT_NAME})
 set_property(TARGET ${PROJECT_NAME} PROPERTY QT_QML_IMPORT_PATH "${QML_IMPORT_PATH}")
 
-add_dependencies(${CMAKE_PROJECT_NAME} fetch_all)
-
 include_directories(${CMAKE_CURRENT_LIST_DIR}/common)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/dependencies/spdlog/include)
 
 capitalize(${PROJECT_NAME} APP_NAME)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-        $<$<BOOL:${BUILD_HUSKARUI_STATIC_LIBRARY}>:BUILD_HUSKARUI_STATIC_LIBRARY>
         $<$<OR:$<CONFIG:Debug>, $<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
         APP_NAME="${APP_NAME}"
         APP_VERSION="${PROJECT_VERSION}"
@@ -50,7 +42,6 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PREFIX_PATH}/lib)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
         Qt6::Quick
         HuskarUIBasic
-        $<$<BOOL:${BUILD_HUSKARUI_STATIC_LIBRARY}>:HuskarUIBasicPlugin>
 )
 
 set(WIN_RC_FILE "")
@@ -73,6 +64,7 @@ endif ()
 set_target_output_dir(${CMAKE_PROJECT_NAME} ${PREFIX_PATH} EXE)
 
 # add additional sources from subdirectories
+add_subdirectory(dependencies)
 add_subdirectory(common)
 add_subdirectory(model)
 add_subdirectory(view)

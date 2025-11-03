@@ -6,3 +6,7 @@ output
 # ignore all files in the dependencies directory except CMakeLists.txt
 src/dependencies/*
 !src/dependencies/CMakeLists.txt
+
+.DS_Store
+.venv
+.cache

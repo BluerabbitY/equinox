@@ -1,12 +1,7 @@
 #include <QGuiApplication>
 
-#ifdef BUILD_HUSKARUI_STATIC_LIBRARY
-#include <QtQml/qqmlextensionplugin.h>
-Q_IMPORT_QML_PLUGIN(HuskarUI_BasicPlugin)
-#endif
-
+#include "inc/hlog.hpp"
 #include "Herald.hpp"
-#include "log/hlog.hpp"
 
 int main(int argc, char *argv[])
 {
