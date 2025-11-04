@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/herald">
-        <file></file>
+    <qresource prefix="/herald/images">
+        <!-- no image files yet -->
     </qresource>
 </RCC>
