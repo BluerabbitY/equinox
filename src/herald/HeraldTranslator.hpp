@@ -1,8 +1,8 @@
 /***********************************************************************************
- * \file Herald.hpp
+* \file HeraldTranslator.hpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
- * \brief
- * \date 2025-10-12 00:18:56
+ * \brief translator file
+ * \date 2025-10-17 21:23:45
  *
  * \copyright Copyright (C) 2025 BlueRabbitY. All rights reserved.
  *
@@ -14,26 +14,16 @@
  ***********************************************************************************/
 #pragma once
 
-#include <QQmlApplicationEngine>
+#include <QTranslator>
 
 namespace herald
 {
 
-class HeraldInit final
+class HeraldTranslator final : public QTranslator
 {
-  public:
-    HeraldInit();
-    ~HeraldInit();
-
-    static void preApplicationSetup();
-
-    void initQmlEngine(QQmlEngine &engine) const;
-
-    bool loadFullUi(QQmlApplicationEngine &engine) const;
-
-  private:
-    class Impl;
-    std::unique_ptr<Impl> implM;
+public:
+    HeraldTranslator();
+    ~HeraldTranslator() override;
 };
 
 } // namespace herald

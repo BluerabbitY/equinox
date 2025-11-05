@@ -1,6 +1,8 @@
 target_sources(${PROJECT_NAME}
         PRIVATE
         addDefaultImportPaths.cpp
-        Herald.cpp
+        HeraldInit.cpp
+        HeraldApplication.cpp
+        HeraldTranslator.cpp
         main.cpp
 )

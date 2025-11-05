@@ -12,7 +12,7 @@
  * specific language governing permissions and limitations under the License.
  *
  ***********************************************************************************/
-#include "Herald.hpp"
+#include "HeraldInit.hpp"
 
 #include "inc/hlog.hpp"
 #include "log/log.h"
@@ -29,6 +29,13 @@ inline void heraldInitResource()
     Q_INIT_RESOURCE(herald);
     Q_INIT_RESOURCE(images);
     Q_INIT_RESOURCE(main);
+}
+
+inline void heraldCleanResource()
+{
+    Q_CLEANUP_RESOURCE(herald);
+    Q_CLEANUP_RESOURCE(images);
+    Q_CLEANUP_RESOURCE(main);
 }
 
 namespace herald
@@ -89,8 +96,6 @@ class HeraldInit::Impl final
   public:
     Impl()
     {
-        HINFO("Platform name: {}", qApp->platformName().toStdString());
-
         registerQmlTypes();
     }
 

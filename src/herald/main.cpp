@@ -1,25 +1,15 @@
-#include <QGuiApplication>
-
-#include "inc/hlog.hpp"
-#include "Herald.hpp"
+#include "HeraldApplication.hpp"
 
 int main(int argc, char *argv[])
 {
     using namespace herald;
 
     // initialization that needs to be performed before creating QApp
-    HeraldInit::preApplicationSetup();
+    HeraldApplication::preSetup();
 
-    QGuiApplication app(argc, argv);
+    const HeraldApplication app(APP_NAME, APP_VERSION, argc, argv);
 
-    QQmlApplicationEngine engine;
-
-    QCoreApplication::setApplicationName(APP_NAME);
-    QCoreApplication::setApplicationVersion(APP_VERSION);
-
-    const HeraldInit herald;
-    herald.initQmlEngine(engine);
-    Q_ASSERT(herald.loadFullUi(engine));
+    app.initHerald();
 
     const int ret = app.exec();
 
