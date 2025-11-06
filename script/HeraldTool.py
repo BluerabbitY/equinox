@@ -1,4 +1,4 @@
-import os, shutil, subprocess, argparse
+import os, shutil, subprocess, argparse, locale
 from typing import List, Optional
 
 def command_exist(cmd: str) -> bool:
@@ -11,8 +11,11 @@ def parse_args():
     group.add_argument('--setup', action='store_true', help='execute setup for Herald')
     group.add_argument('--update-dependent', action='store_true', help='update dependent for Herald')
     group.add_argument('--build-dependent', action='store_true', help='build dependent for Herald')
-    group.add_argument('--build-clean', action='store_true', help='clean dependent build cache')
-    group.add_argument('--build-deepclean', action='store_true', help='clean dependent build directory')
+    group.add_argument('--clean', action='store_true', help='clean dependent build cache')
+    group.add_argument('--deepclean', action='store_true', help='clean dependent build directory')
+    group.add_argument('--list-all-localization', action='store_true', help='list all optional localization codes')
+    group.add_argument('--list-current-localization', action='store_true', help='list current localization')
+    group.add_argument('--add-localization', action='store_true', help='add new localization file')
 
     parser.add_argument('--qt-prefix', type=str, help='qt prefix path that must be used with --setup')
 
@@ -89,6 +92,46 @@ def clean_build_directory(build_dir: str):
     else:
         print(f"Build directory does not exist: {abs_build}")
 
+def list_localization():
+    available_locales = locale.locale_alias
+    standard_locales = {k: v for k, v in available_locales.items() if '_' in k and len(k) == 5}
+    formatted_locales = [loc.split('_')[0].lower() + '_' + loc.split('_')[1].upper() for loc in standard_locales]
+    formatted_locales = sorted(set(formatted_locales))
+
+    if formatted_locales:
+        formatted_locales.pop(0)
+
+    print("Optional localization codes are as follows:")
+
+    col_width = 10
+
+    for i in range(0, len(formatted_locales), 3):
+        row = formatted_locales[i:i+4]
+        print("".join(f"{str(i+j).rjust(3)}: {loc:<{col_width}}" for j, loc in enumerate(row)))
+
+    return formatted_locales, standard_locales
+
+
+def generate_localization_file(formatted_code_array, standard_code_array):
+    has_pick_Llanguage = False
+
+    while not has_pick_Llanguage:
+        user_input = input("Please enter the localization code index you wish to generate ('q' to quit): ").strip()
+
+        try:
+            if user_input.lower() == 'q':
+                break
+
+            selected_index = int(user_input)
+            selected_locale = formatted_code_array[selected_index]
+            full_locale = standard_code_array.get(selected_locale.lower(), "Unknown")
+            print(f"Generate localization file for language code: {selected_locale}, full name: {full_locale}")
+            has_pick_Llanguage = True
+
+        except (ValueError, IndexError):
+            print("Invalid input. ")
+
+
 if __name__ == "__main__":
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     projectPath = os.path.dirname(scriptPath)
@@ -135,9 +178,16 @@ if __name__ == "__main__":
             for name, git_url, git_branch, install_dir, cmake_opt in tasks:
                 build_and_install(depDir + "/" + name, cacheDir + "/" + name, install_dir, cmake_opt)
 
-        if allArgs.build_clean:
+        if allArgs.clean:
             for name, git_url, git_branch, install_dir, cmake_opt in tasks:
                 shutil.rmtree(depDir + "/" + name)
+
+        if allArgs.list_all_localization:
+            formattedLocalizationList, standardLocalizationList = list_localization()
+
+        if allArgs.add_localization:
+            formattedLocalizationList, standardLocalizationList = list_localization()
+            generate_localization_file(formattedLocalizationList, standardLocalizationList)
 
     except subprocess.CalledProcessError as e:
         print("Failed: ", e)
