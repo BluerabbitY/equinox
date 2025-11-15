@@ -26,7 +26,7 @@ namespace
 {
 class Formatter final : public spdlog::custom_flag_formatter
 {
-  public:
+public:
     void format(const spdlog::details::log_msg &msg, const std::tm &, spdlog::memory_buf_t &dest) override
     {
         static const std::unordered_map<spdlog::level::level_enum, std::string> nameTable = {

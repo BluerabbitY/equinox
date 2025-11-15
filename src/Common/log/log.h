@@ -33,7 +33,7 @@ namespace herald::common
 
 class LogService
 {
-  public:
+public:
     LogService(const std::string &header, const std::string &filePath, int fileMaxSize = 10 /* MB */,
                int fileMaxCount = 3, std::size_t queueSize = 512, std::size_t threadCount = 2);
     ~LogService();
@@ -46,7 +46,7 @@ class LogService
 
     static void shutdown();
 
-  private:
+private:
     std::shared_ptr<spdlog::details::thread_pool> threadPoolM;
     std::shared_ptr<spdlog::async_logger> loggerM;
 };

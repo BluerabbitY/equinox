@@ -14,8 +14,8 @@
  ***********************************************************************************/
 #pragma once
 
-#include <QGuiApplication>
 #include "inc/hlog.hpp"
+#include <QGuiApplication>
 
 class QQmlApplicationEngine;
 
@@ -27,8 +27,8 @@ class HeraldInit;
 
 class HeraldApplication final : public QGuiApplication
 {
-  public:
-    HeraldApplication(const QString & appName, const QString & version, int &argc, char **argv);
+public:
+    HeraldApplication(const QString &appName, const QString &version, int &argc, char **argv);
 
     ~HeraldApplication() override;
 

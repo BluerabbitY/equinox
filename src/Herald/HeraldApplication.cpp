@@ -13,13 +13,14 @@
  *
  ***********************************************************************************/
 #include "HeraldApplication.hpp"
-#include "HeraldTranslator.hpp"
 #include "HeraldInit.hpp"
+#include "HeraldTranslator.hpp"
 
 namespace herald
 {
 
-HeraldApplication::HeraldApplication(const QString& appName, const QString& version, int &argc, char **argv) : QGuiApplication{argc, argv}
+HeraldApplication::HeraldApplication(const QString &appName, const QString &version, int &argc, char **argv)
+    : QGuiApplication{argc, argv}
 {
     setApplicationName(appName);
     setApplicationVersion(version);
@@ -41,8 +42,8 @@ void HeraldApplication::preSetup()
 
 void HeraldApplication::initHerald() const
 {
-    HINFO("App: {}, platform: {}, version: {}", applicationName().toStdString(),
-        platformName().toStdString(), applicationVersion().toStdString());
+    HINFO("App: {}, platform: {}, version: {}", applicationName().toStdString(), platformName().toStdString(),
+          applicationVersion().toStdString());
     heraldInitM->initQmlEngine(*engineM);
     Q_ASSERT(heraldInitM->loadFullUi(*engineM));
     Q_ASSERT(loadTranslaator());

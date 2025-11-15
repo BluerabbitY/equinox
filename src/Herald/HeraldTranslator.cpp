@@ -1,5 +1,5 @@
 /***********************************************************************************
-* \file Translator.cpp
+ * \file HeraldTranslator.cpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief translator
  * \date 2025-10-17 21:29:51

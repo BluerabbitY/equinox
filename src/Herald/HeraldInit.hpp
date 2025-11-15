@@ -21,7 +21,7 @@ namespace herald
 
 class HeraldInit final
 {
-  public:
+public:
     HeraldInit();
     ~HeraldInit();
 
@@ -31,7 +31,7 @@ class HeraldInit final
 
     bool loadFullUi(QQmlApplicationEngine &engine) const;
 
-  private:
+private:
     class Impl;
     std::unique_ptr<Impl> implM;
 };

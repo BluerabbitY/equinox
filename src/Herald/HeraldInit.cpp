@@ -1,5 +1,5 @@
 /***********************************************************************************
- * \file Herald.cpp
+ * \file HeraldInit.cpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief
  * \date 2025-10-12 00:35:11
@@ -93,7 +93,7 @@ void heraldLogger(QtMsgType type, const QMessageLogContext &context, const QStri
 
 class HeraldInit::Impl final
 {
-  public:
+public:
     Impl()
     {
         registerQmlTypes();
@@ -117,7 +117,7 @@ class HeraldInit::Impl final
         return !engine.rootObjects().isEmpty();
     }
 
-  private:
+private:
     void registerQmlTypes()
     {
         heraldInitResource();

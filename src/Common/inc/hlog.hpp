@@ -1,5 +1,5 @@
 /***********************************************************************************
- * \file log.hpp
+ * \file hlog.hpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief log
  * \date 2025-10-12 16:09:15
@@ -35,26 +35,31 @@
     {                                                                                                                  \
         SPDLOG_TRACE(__VA_ARGS__);                                                                                     \
     } while (0)
+
 #define HDEBUG(...)                                                                                                    \
     do                                                                                                                 \
     {                                                                                                                  \
         SPDLOG_DEBUG(__VA_ARGS__);                                                                                     \
     } while (0)
+
 #define HINFO(...)                                                                                                     \
     do                                                                                                                 \
     {                                                                                                                  \
         SPDLOG_INFO(__VA_ARGS__);                                                                                      \
     } while (0)
+
 #define HWARN(...)                                                                                                     \
     do                                                                                                                 \
     {                                                                                                                  \
         SPDLOG_WARN(__VA_ARGS__);                                                                                      \
     } while (0)
+
 #define HERROR(...)                                                                                                    \
     do                                                                                                                 \
     {                                                                                                                  \
         SPDLOG_ERROR(__VA_ARGS__);                                                                                     \
     } while (0)
+
 #define HFATAL(...)                                                                                                    \
     do                                                                                                                 \
     {                                                                                                                  \

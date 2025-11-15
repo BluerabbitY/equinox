@@ -1,5 +1,5 @@
 /***********************************************************************************
-* \file HeraldTranslator.hpp
+ * \file HeraldTranslator.hpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief translator file
  * \date 2025-10-17 21:23:45
