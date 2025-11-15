@@ -16,6 +16,8 @@ def parse_args():
     group.add_argument('--list-all-localization', action='store_true', help='list all optional localization codes')
     group.add_argument('--list-current-localization', action='store_true', help='list current localization')
     group.add_argument('--add-localization', action='store_true', help='add new localization file')
+    group.add_argument('--update-localization', action='store_true', help='update localization file')
+    group.add_argument('--release-localization', type=str, help='release localization file')
 
     parser.add_argument('--qt-prefix', type=str, help='qt prefix path that must be used with --setup')
 
@@ -114,13 +116,14 @@ def list_localization():
 
 def generate_localization_file(formatted_code_array, standard_code_array):
     has_pick_Llanguage = False
+    selected_locale=""
 
     while not has_pick_Llanguage:
         user_input = input("Please enter the localization code index you wish to generate ('q' to quit): ").strip()
 
         try:
             if user_input.lower() == 'q':
-                break
+                return None
 
             selected_index = int(user_input)
             selected_locale = formatted_code_array[selected_index]
@@ -131,12 +134,27 @@ def generate_localization_file(formatted_code_array, standard_code_array):
         except (ValueError, IndexError):
             print("Invalid input. ")
 
+        return selected_locale
+
+    return None
+
+def update_localization_file(qt_path: str, src_dir: str, local_code: str):
+    subprocess.run([
+        qt_path + "/bin/lupdate",
+        src_dir + "/View",
+        "-ts",
+        src_dir + "/Localization/" + local_code + ".ts",
+        "-no-obsolete"], check=True)
+
+def get_file_list(dir_path: str):
+    return [onefile.name for onefile in os.scandir(dir_path) if onefile.is_file() and onefile.name.endswith(".ts") ]
 
 if __name__ == "__main__":
     scriptPath = os.path.dirname(os.path.abspath(__file__))
     projectPath = os.path.dirname(scriptPath)
 
-    depDir = projectPath + "/src/dependencies"
+    srcDir = projectPath + "/src"
+    depDir = srcDir + "/dependencies"
     cacheDir = projectPath + "/.cache"
     installDir = depDir + "/install"
 
@@ -187,7 +205,30 @@ if __name__ == "__main__":
 
         if allArgs.add_localization:
             formattedLocalizationList, standardLocalizationList = list_localization()
-            generate_localization_file(formattedLocalizationList, standardLocalizationList)
+            localCode = generate_localization_file(formattedLocalizationList, standardLocalizationList)
+
+            update_localization_file(qt_prefix_path, srcDir, localCode)
+
+        if allArgs.update_localization:
+            localization_file = get_file_list(srcDir + "/Localization")
+
+            for loc_file in localization_file:
+                localCode = loc_file.replace(".ts", "")
+                print(f"Updating localization file for language code: {localCode}")
+                update_localization_file(qt_prefix_path, srcDir, localCode)
+
+        if allArgs.release_localization is not None:
+            localization_file = get_file_list(srcDir + "/Localization")
+            os.makedirs(allArgs.release_localization + "/i18n/", exist_ok=True)
+
+            for loc_file in localization_file:
+                localCode = loc_file.replace(".ts", "")
+                print(f"Releasing localization file for language code: {localCode}")
+                subprocess.run([
+                    qt_prefix_path + "/bin/lrelease",
+                    srcDir + "/Localization/" + loc_file,
+                    "-qm",
+                    allArgs.release_localization + "/i18n/" + localCode + ".qm"], check=True)
 
     except subprocess.CalledProcessError as e:
         print("Failed: ", e)

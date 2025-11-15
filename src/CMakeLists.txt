@@ -65,6 +65,7 @@ set_target_output_dir(${CMAKE_PROJECT_NAME} ${PREFIX_PATH} EXE)
 
 # add additional sources from subdirectories
 add_subdirectory(dependencies)
+add_subdirectory(Localization)
 add_subdirectory(common)
 add_subdirectory(model)
 add_subdirectory(view)

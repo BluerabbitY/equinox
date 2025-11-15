@@ -50,7 +50,8 @@ void HeraldApplication::initHerald() const
 
 bool HeraldApplication::loadTranslaator() const
 {
-    const auto defaultTanslateFile = QStringLiteral(":/herald/i18n/zh_CN.qm");
+    const QString appDir = applicationDirPath() + "/i18n";
+    const auto defaultTanslateFile = appDir + "/zh_CN.qm";
     if (!heraldTranslatorM->load(defaultTanslateFile))
     {
         HERROR("Error loading translator file: {}", defaultTanslateFile.toStdString());

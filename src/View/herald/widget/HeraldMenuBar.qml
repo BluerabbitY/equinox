@@ -2,36 +2,25 @@
 import QtQuick
 import HuskarUI.Basic
 
-Row {
+Column {
     id: menuBar
 
-    HusButton {
-        text: qsTr('默认')
-        type: HusButton.Type_Text
+    Row {
+        id: menuBarFirstRow
+
+        HusButton {
+            text: qsTrId("HERALD::MENUBAR::LANGUAGE")
+            type: HusButton.Type_Text
+        }
+
+        HusButton {
+            text: qsTrId("HERALD::MENUBAR::ABOUT")
+            type: HusButton.Type_Text
+            // radiusBg: 0
+        }
     }
 
-    HusButton {
-        text: qsTr('线框')
-        type: HusButton.Type_Text
-    }
-
-    HusButton {
-        text: qsTr('主要')
-        type: HusButton.Type_Text
-    }
-
-    HusButton {
-        text: qsTr('填充')
-        type: HusButton.Type_Text
-    }
-
-    HusButton {
-        text: qsTr('文本')
-        type: HusButton.Type_Text
-    }
-
-    HusButton {
-        text: qsTr('about')
-        type: HusButton.Type_Text
+    Row {
+        id: toolBar
     }
 }
