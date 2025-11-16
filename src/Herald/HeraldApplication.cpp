@@ -44,19 +44,24 @@ void HeraldApplication::initHerald() const
 {
     HINFO("App: {}, platform: {}, version: {}", applicationName().toStdString(), platformName().toStdString(),
           applicationVersion().toStdString());
-    heraldInitM->initQmlEngine(*engineM);
-    Q_ASSERT(heraldInitM->loadFullUi(*engineM));
     Q_ASSERT(loadTranslaator());
+    heraldInitM->initQmlEngine(*engineM);
+    engineM->retranslate();
+    Q_ASSERT(heraldInitM->loadFullUi(*engineM));
 }
 
 bool HeraldApplication::loadTranslaator() const
 {
-    const QString appDir = applicationDirPath() + "/i18n";
-    const auto defaultTanslateFile = appDir + "/zh_CN.qm";
-    if (!heraldTranslatorM->load(defaultTanslateFile))
+    if (!heraldTranslatorM->load(QLocale::system(), QLocale::system().name(), "", applicationDirPath() + "/i18n",
+                                 ".qm"))
     {
-        HERROR("Error loading translator file: {}", defaultTanslateFile.toStdString());
-        return false;
+        HWARN("Error loading translator file: {}.qm, try to set default", QLocale::system().name().toStdString());
+
+        if (!heraldTranslatorM->load("en_US", "", applicationDirPath() + "/i18n", ".qm"))
+        {
+            HERROR("Error loading translator file: {}.qm", QLocale::system().name().toStdString());
+            return false;
+        }
     }
 
     return installTranslator(heraldTranslatorM.get());

@@ -7,7 +7,7 @@ HusWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTrId('Herald')
+    title: qsTr('HERALD::MAIN::TITLE')
     // captionBar.winIconVisible: false
     Component.onCompleted: {
         if (Qt.os === 'windows') {

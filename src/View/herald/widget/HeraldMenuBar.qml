@@ -9,12 +9,12 @@ Column {
         id: menuBarFirstRow
 
         HusButton {
-            text: qsTrId("HERALD::MENUBAR::LANGUAGE")
+            text: qsTr("HERALD::MENUBAR::LANGUAGE")
             type: HusButton.Type_Text
         }
 
         HusButton {
-            text: qsTrId("HERALD::MENUBAR::ABOUT")
+            text: qsTr("HERALD::MENUBAR::ABOUT")
             type: HusButton.Type_Text
             // radiusBg: 0
         }
