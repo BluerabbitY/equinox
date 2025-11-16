@@ -1,5 +1,5 @@
 /***********************************************************************************
- * \file hlog.hpp
+ * \file Hlog.hpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief log
  * \date 2025-10-12 16:09:15

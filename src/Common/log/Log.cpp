@@ -1,5 +1,5 @@
 /***********************************************************************************
- * \file log.cpp
+ * \file Log.cpp
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief log service
  * \date 2025-10-12 13:57:15
@@ -12,7 +12,7 @@
  * specific language governing permissions and limitations under the License.
  *
  ***********************************************************************************/
-#include "log.h"
+#include "Log.h"
 
 #include "spdlog/async.h"
 #include "spdlog/sinks/rotating_file_sink.h"

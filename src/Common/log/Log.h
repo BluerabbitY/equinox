@@ -1,5 +1,5 @@
 /***********************************************************************************
- * \file log.h
+ * \file Log.h
  * \author BlueRabbitY (BlueRabbitY\@protonmail.com)
  * \brief log service
  * \date 2025-10-12 13:46:48

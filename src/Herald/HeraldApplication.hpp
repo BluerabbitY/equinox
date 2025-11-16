@@ -14,7 +14,7 @@
  ***********************************************************************************/
 #pragma once
 
-#include "inc/hlog.hpp"
+#include "inc/Hlog.hpp"
 #include <QGuiApplication>
 
 class QQmlApplicationEngine;
