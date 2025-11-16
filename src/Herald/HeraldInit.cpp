@@ -99,9 +99,7 @@ public:
         registerQmlTypes();
     }
 
-    ~Impl()
-    {
-    }
+    ~Impl() = default;
 
     void initQmlEngine(QQmlEngine &engine)
     {
@@ -111,7 +109,7 @@ public:
 
     bool loadFullUi(QQmlApplicationEngine &engine)
     {
-        const QString mainQmlFile = QStringLiteral("qrc:/herald/main.qml");
+        const auto mainQmlFile = QStringLiteral("qrc:/herald/main.qml");
         engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
         engine.load(QUrl(mainQmlFile));
         return !engine.rootObjects().isEmpty();
