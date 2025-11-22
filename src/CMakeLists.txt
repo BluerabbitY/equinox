@@ -9,8 +9,10 @@ find_package(Qt6 6.8.3 EXACT REQUIRED COMPONENTS
 
 find_package(HuskarUI REQUIRED)
 
+include_directories(${CMAKE_CURRENT_LIST_DIR}/Common)
+
 # Make Qt Creator aware of where the QML modules live
-list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}/view")
+list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}/View")
 set(QML_IMPORT_PATH ${QML_IMPORT_PATH} CACHE STRING "" FORCE)
 
 # Qt build specific options, need to be defined before any Qt target
@@ -64,10 +66,10 @@ endif ()
 set_target_output_dir(${CMAKE_PROJECT_NAME} ${PREFIX_PATH} EXE)
 
 # add additional sources from subdirectories
-add_subdirectory(dependencies)
+add_subdirectory(Dependencies)
 add_subdirectory(Localization)
-add_subdirectory(common)
-add_subdirectory(model)
-add_subdirectory(view)
-add_subdirectory(viewmodel)
-add_subdirectory(herald)
+add_subdirectory(Common)
+add_subdirectory(Model)
+add_subdirectory(View)
+add_subdirectory(ViewModel)
+add_subdirectory(Herald)

@@ -1,7 +1,7 @@
 
 target_sources(${PROJECT_NAME}
         PRIVATE
-        herald/herald.qrc
-        images/images.qrc
+        Herald/herald.qrc
+        Images/images.qrc
         main.qrc
 )

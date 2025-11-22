@@ -4,8 +4,8 @@ cmake-build-release
 output
 
 # ignore all files in the dependencies directory except CMakeLists.txt
-src/dependencies/*
-!src/dependencies/CMakeLists.txt
+src/Dependencies/*
+!src/Dependencies/CMakeLists.txt
 
 .DS_Store
 .venv

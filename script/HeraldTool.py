@@ -178,7 +178,7 @@ if __name__ == "__main__":
     tasks = [
         # name, git url, branch, install dir, cmake options
         ("lib60870", "https://github.com/BluerabbitY/lib60870.git", "master", installDir, ["-DBUILD_EXAMPLES=OFF", "-DBUILD_TESTS=OFF"]),
-        ("spdlog", "https://github.com/gabime/spdlog.git", "v1.x", None, ["-DSPDLOG_MASTER_PROJECT=OFF"]),
+        ("spdlog", "https://github.com/gabime/spdlog.git", "v1.x", installDir, ["-DSPDLOG_MASTER_PROJECT=ON"]),
         ("HuskarUI", "https://github.com/mengps/HuskarUI.git", "master", installDir, ["-DBUILD_HUSKARUI_GALLERY=OFF", f"-DCMAKE_PREFIX_PATH={qt_prefix_path}"]),
     ]
 

@@ -14,7 +14,7 @@
  ***********************************************************************************/
 #include "HeraldInit.hpp"
 
-#include "Include/Hlog.hpp"
+#include "Inc/Hlog.hpp"
 #include "Log/Log.h"
 
 #include <husapp.h>

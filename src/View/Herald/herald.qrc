@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/herald">
-        <file>widget/HeraldMenuBar.qml</file>
-        <file>widget/qmldir</file>
+        <file>Widget/HeraldMenuBar.qml</file>
+        <file>Widget/qmldir</file>
     </qresource>
 </RCC>
