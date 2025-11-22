@@ -154,7 +154,7 @@ if __name__ == "__main__":
     projectPath = os.path.dirname(scriptPath)
 
     srcDir = projectPath + "/src"
-    depDir = srcDir + "/dependencies"
+    depDir = srcDir + "/Dependencies"
     cacheDir = projectPath + "/.cache"
     installDir = depDir + "/install"
 
