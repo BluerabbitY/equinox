@@ -3,9 +3,11 @@ include(${CMAKE_SOURCE_DIR}/cmake/build.cmake)
 # Make all found packages global to avoid seaching them multiple times
 set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS
+find_package(Qt6 6.8.3 EXACT REQUIRED COMPONENTS
         Quick
 )
+
+find_package(HuskarUI REQUIRED)
 
 # Make Qt Creator aware of where the QML modules live
 list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}/view")
@@ -37,11 +39,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         WIN32_EXECUTABLE TRUE
 )
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PREFIX_PATH}/include/HuskarUI)
-target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PREFIX_PATH}/lib)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
         Qt6::Quick
-        HuskarUIBasic
+        HuskarUI::Basic
 )
 
 set(WIN_RC_FILE "")
