@@ -180,6 +180,7 @@ if __name__ == "__main__":
         ("lib60870", "https://github.com/BluerabbitY/lib60870.git", "master", installDir, ["-DBUILD_EXAMPLES=OFF", "-DBUILD_TESTS=OFF"]),
         ("spdlog", "https://github.com/gabime/spdlog.git", "v1.x", installDir, ["-DSPDLOG_MASTER_PROJECT=ON"]),
         ("HuskarUI", "https://github.com/mengps/HuskarUI.git", "master", installDir, ["-DBUILD_HUSKARUI_GALLERY=OFF", f"-DCMAKE_PREFIX_PATH={qt_prefix_path}"]),
+        ("pugixml", "https://github.com/zeux/pugixml.git", "master", installDir, ["-DBUILD_SHARED_LIBS=OFF"]),
     ]
 
     try:

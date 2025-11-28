@@ -7,7 +7,11 @@ find_package(Qt6 6.8.3 EXACT REQUIRED COMPONENTS
         Quick
 )
 
+set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${CMAKE_CURRENT_LIST_DIR}/Dependencies/install")
+
 find_package(HuskarUI REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+find_package(pugixml CONFIG REQUIRED)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/Common)
 
@@ -32,6 +36,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
         $<$<OR:$<CONFIG:Debug>, $<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
         APP_NAME="${APP_NAME}"
         APP_VERSION="${PROJECT_VERSION}"
+        SPDLOG_COMPILED_LIB
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -44,6 +49,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
         Qt6::Quick
         HuskarUI::Basic
+        spdlog::spdlog
+        pugixml::pugixml
 )
 
 set(WIN_RC_FILE "")
