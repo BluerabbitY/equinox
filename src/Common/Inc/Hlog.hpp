@@ -28,7 +28,7 @@
 #endif
 #endif
 
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 #define HTRACE(...)                                                                                                    \
     do                                                                                                                 \

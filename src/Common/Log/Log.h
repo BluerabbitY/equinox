@@ -16,7 +16,7 @@
 
 #include <memory>
 
-#include "spdlog/common.h"
+#include <spdlog/common.h>
 
 namespace spdlog
 {

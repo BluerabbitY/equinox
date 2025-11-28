@@ -16,13 +16,12 @@
 
 #include "Inc/Hlog.hpp"
 #include "Log/Log.h"
+#include "addDefaultImportPaths.hpp"
 
 #include <husapp.h>
 
 #include <QQuickWindow>
 #include <qqmlcontext.h>
-
-#include "addDefaultImportPaths.hpp"
 
 inline void heraldInitResource()
 {
